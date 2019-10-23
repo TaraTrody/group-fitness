@@ -9,12 +9,22 @@ import { theme } from '../lib/theme';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
+    const pageProps = {};
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+      Object.assign(pageProps, await Component.getInitialProps(ctx));
     }
+    // eslint-disable-next-line no-console
+    console.log(pageProps);
+
     return { pageProps };
+  }
+
+  componentDidMount() {
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
   }
 
   render() {
