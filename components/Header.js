@@ -44,7 +44,7 @@ const Header = () => {
     <div>
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-between" align="center">
-          <Link href="https://google.com">
+          <Link href="https://spotify.com">
             <a>
               <Typography classes={{ root: classes.logo }} variant="h5">
                 Group Fitness Instructors
