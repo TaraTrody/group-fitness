@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { Button } from '@material-ui/core';
 
 const Index = () => (
   <div>
@@ -9,7 +8,6 @@ const Index = () => (
     </Head>
 
     <p>Content on Index page</p>
-    <Button variant="contained">Hello!</Button>
   </div>
 );
 

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core';
+import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
   render() {
@@ -18,6 +18,7 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
+            // eslint-disable-next-line max-len
             href="https://fonts.googleapis.com/css?family=Exo:400,500,600,700,800,900,900i&display=swap"
           />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -78,25 +79,28 @@ class MyDocument extends Document {
 }
 
 MyDocument.getInitialProps = async (ctx) => {
-  const sheets = new ServerStyleSheets();
+  const sheet = new ServerStyleSheet();
   const originalRenderPage = ctx.renderPage;
+  try {
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+      });
 
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-    });
+    const initialProps = await Document.getInitialProps(ctx);
 
-  const initialProps = await Document.getInitialProps(ctx);
+    return {
+      ...initialProps,
 
-  return {
-    ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
-    styles: (
-      <>
-        {initialProps.styles}
-        {sheets.getStyleElement()}
-      </>
-    ),
-  };
+      styles: (
+        <>
+          {initialProps.styles}
+          {sheet.getStyleElement()}
+        </>
+      ),
+    };
+  } finally {
+    sheet.seal();
+  }
 };
 export default MyDocument;

@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import App from 'next/app';
-import { ThemeProvider } from '@material-ui/styles';
-import { CssBaseline } from '@material-ui/core';
-import Header from '../components/Header';
-
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from '../lib/global';
 import { theme } from '../lib/theme';
+
+import Header from '../components/Navbar';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -31,13 +31,11 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Header {...pageProps} />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </div>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Header {...pageProps} />
+        <Component {...pageProps} />
+      </ThemeProvider>
     );
   }
 }
