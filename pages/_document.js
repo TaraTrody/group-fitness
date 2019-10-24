@@ -18,7 +18,7 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Muli:300,400:latin"
+            href="https://fonts.googleapis.com/css?family=Exo:400,500,600,700,800,900,900i&display=swap"
           />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link
@@ -61,7 +61,7 @@ class MyDocument extends Document {
         </Head>
         <body
           style={{
-            font: '16px Muli',
+            font: '16px Exo',
             color: '#222',
             margin: '0px auto',
             fontWeight: '300',

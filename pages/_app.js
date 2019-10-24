@@ -31,7 +31,7 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <div style={{ padding: '10px 45px' }}>
+      <div>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Header {...pageProps} />

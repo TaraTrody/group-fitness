@@ -1,6 +1,6 @@
 const styleToolbar = {
   backgroundColor: '#FFF',
-  height: '64px',
+  height: '78px',
   paddingRight: '20px',
 };
 
