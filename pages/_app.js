@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyles from '../lib/global';
-import { theme } from '../lib/theme';
+import App from 'next/app';
+import React from 'react';
 
-import Header from '../components/Navbar';
+import { theme } from '../lib/theme';
+import GlobalStyles from '../lib/global';
+
+// import Header from '../components/Navbar';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -30,12 +31,20 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
+    // console.log(pageProps);
+
     return (
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Header {...pageProps} />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <>
+        {/* ThemeProvider makes the theme available down the React
+              tree thanks to React context. */}
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+
+          {/* <Header {...pageProps} /> */}
+          <GlobalStyles />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </>
     );
   }
 }

@@ -30,47 +30,14 @@ class MyDocument extends Document {
 
           <style>
             {`
-              a, a:focus {
-                font-weight: 400;
-                color: #1565C0;
-                text-decoration: none;
-                outline: none
-              }
-              a:hover, button:hover {
-                opacity: 0.75;
-                cursor: pointer
-              }
-              blockquote {
-                padding: 0 1em;
-                color: #555;
-                border-left: 0.25em solid #dfe2e5;
-              }
-              pre {
-                display: block;
-                overflow-x: auto;
-                padding: 0.5em;
-                background: #FFF;
-                border: 1px solid #ddd;
-              }
-              code {
-                font-size: 14px;
-                background: #FFF;
-                padding: 3px 5px;
+              #__next{
+                height: 100vh;
               }
             `}
           </style>
         </Head>
-        <body
-          style={{
-            font: '16px Exo',
-            color: '#222',
-            margin: '0px auto',
-            fontWeight: '300',
-            lineHeight: '1.5em',
-            backgroundColor: '#F7F9FC',
-          }}
-        >
-          <Main />
+        <body>
+          <Main style={{ marginTop: '100px' }} />
           <NextScript />
         </body>
       </html>
