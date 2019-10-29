@@ -6,6 +6,8 @@ import React from 'react';
 import { theme } from '../lib/theme';
 import GlobalStyles from '../lib/global';
 
+import Navigation from '../components/navigation/index';
+
 // import Header from '../components/Navbar';
 
 class MyApp extends App {
@@ -40,7 +42,7 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 
-          {/* <Header {...pageProps} /> */}
+          <Navigation {...pageProps} />
           <GlobalStyles />
           <Component {...pageProps} />
         </ThemeProvider>

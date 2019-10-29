@@ -1,17 +1,28 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import Head from 'next/head';
-import Navigation from '../components/navigation/index';
+import propTypes from 'prop-types';
 
-const Index = () => (
+const Index = ({ user }) => (
   <div style={{ padding: '10px 45px', marginTop: '100px' }}>
     <Head>
       <title>Index page</title>
       <meta name="description" content="This is a description of the Index page" />
     </Head>
-    <Navigation />
-    <p>Content on Index page</p>
-    <button type="button">its a button</button>
-    <p>more content</p>
+
+    <p>Email: {user.email}</p>
   </div>
 );
+
+Index.getInitialProps = async (ctx) => ({ user: ctx.query.user });
+
+Index.propTypes = {
+  user: propTypes.shape({
+    email: propTypes.string.isRequired,
+  }),
+};
+
+Index.defaultProps = {
+  user: null,
+};
 
 export default Index;
