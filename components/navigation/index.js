@@ -1,29 +1,33 @@
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import Navbar from './Navbar';
 
-class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      navbarOpen: false,
-    };
-  }
+const Navigation = ({ user }) => {
+  const [navbarOpen, setNavBar] = useState(false);
 
-  handleNavbar = () => {
-    this.setState((prevState) => ({ navbarOpen: !prevState.navbarOpen }));
+  const handleNavbar = () => {
+    setNavBar(!navbarOpen);
   };
 
-  render() {
-    const { navbarOpen } = this.state;
-    // eslint-disable-next-line prettier/prettier
-    return (
-      <Navbar
-        navbarState={navbarOpen}
-        handleNavbar={this.handleNavbar}
-      />
-      );
-  }
-}
+  // eslint-disable-next-line prettier/prettier
+  return (
+    <Navbar
+      navbarState={navbarOpen}
+      handleNavbar={handleNavbar}
+    />
+  );
+};
 
 export default Navigation;
+
+Navigation.propTypes = {
+  user: propTypes.shape({
+    avatarUrl: propTypes.string,
+    displayName: propTypes.string,
+  }),
+};
+
+Navigation.defaultProps = {
+  user: null,
+};

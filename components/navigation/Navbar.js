@@ -37,21 +37,27 @@ const Navbar = (props) => {
             <Logo>Group Fitness Instructors</Logo>
           </div>
           <Spacer />
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <NavLinks style={linkAnimation}>
+              <li>
+                <Link href="https://google.com">
+                  <NavItem>Join as Instructor</NavItem>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <NavItem>FAQ</NavItem>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <NavItem>Log In</NavItem>
+                </Link>
+              </li>
+            </NavLinks>
+            <Button />
+          </div>
 
-          <NavLinks style={linkAnimation}>
-            <Link href="https://google.com">
-              <NavItem>Join as Instructor</NavItem>
-            </Link>
-
-            <Link href="/">
-              <NavItem>FAQ</NavItem>
-            </Link>
-
-            <Link href="/">
-              <NavItem>Log In</NavItem>
-            </Link>
-          </NavLinks>
-          <Button />
 
         </FlexContainer>
       </NavBar>
@@ -108,14 +114,18 @@ const Logo = styled.a`
           }
 `;
 
-const NavLinks = styled(animated.div)`
+const NavLinks = styled(animated.ul)`
         display: flex;
         padding: 1.5rem;
         align-items: center;
+        & li {
+          list-style: none;
+        }
       
       @media (max-width: 51.25rem) {
         display: none;
       }
+      
     `;
 const NavItem = styled.a`
         padding: 1rem;
