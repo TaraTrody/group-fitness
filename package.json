@@ -13,6 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
     "connect-mongo": "^3.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -22,7 +25,6 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-fontawesome": "^1.6.1",
     "react-jss": "^10.0.0",
     "react-spring": "^8.0.27",
     "styled-components": "^4.4.0"
