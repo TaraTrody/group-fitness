@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-indent */
 /* eslint-disable prettier/prettier */
 import Link from 'next/link';
 import styled from 'styled-components';
-import { bool, func } from 'prop-types'
+import propTypes, { bool, func } from 'prop-types'
 import { useSpring, animated, config } from 'react-spring'
 
 import BurgerMenu from './Burger'
@@ -10,7 +11,7 @@ import Button from './Button'
 
 
 const Navbar = (props) => {
-  const { navbarState, handleNavbar } = props;
+  const { navbarState, handleNavbar, user } = props;
 
   const barAnimation = useSpring({
     from: { transform: 'translate3d(0, -10rem, 0)' },
@@ -38,24 +39,34 @@ const Navbar = (props) => {
           </div>
           <Spacer />
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <NavLinks style={linkAnimation}>
-              <li>
-                <Link href="https://google.com">
-                  <NavItem>Join as Instructor</NavItem>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <NavItem>FAQ</NavItem>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <NavItem>Log In</NavItem>
-                </Link>
-              </li>
-            </NavLinks>
-            <Button />
+            {(!user) ? (
+              <>
+                <NavLinks style={linkAnimation}>
+                  <li>
+                    <Link href="https://google.com">
+                      <NavItem>Join as Instructor</NavItem>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/">
+                      <NavItem>FAQ</NavItem>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/">
+                      <NavItem>Log In</NavItem>
+                    </Link>
+                  </li>
+                </NavLinks>
+                <Button />
+              </>
+            ) : (
+                <DisplayName>
+                  Hi
+                  {' '}
+                  {user.displayName}
+                </DisplayName>
+              )}
           </div>
 
 
@@ -71,7 +82,14 @@ const Navbar = (props) => {
 
 Navbar.propTypes = {
   navbarState: bool.isRequired,
-  handleNavbar: func.isRequired
+  handleNavbar: func.isRequired,
+  user: propTypes.shape({
+    displayName: propTypes.string.isRequired
+  })
+}
+
+Navbar.defaultProps = {
+  user: null
 }
 
 export default Navbar;
@@ -148,4 +166,8 @@ const BurgerWrapper = styled.div`
 
 const Spacer = styled.div`
       flex: 1
+`;
+
+const DisplayName = styled.h4`
+      color: ${mainText};
 `;

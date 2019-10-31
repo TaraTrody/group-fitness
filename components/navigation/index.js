@@ -15,6 +15,7 @@ const Navigation = ({ user }) => {
     <Navbar
       navbarState={navbarOpen}
       handleNavbar={handleNavbar}
+      user={user}
     />
   );
 };
