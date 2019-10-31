@@ -8,6 +8,7 @@ import { useSpring, animated, config } from 'react-spring'
 import BurgerMenu from './Burger'
 import CollapseMenu from './CollapseMenu'
 import Button from './Button'
+import UserDropDown from './UserDropDown'
 
 
 const Navbar = (props) => {
@@ -61,11 +62,7 @@ const Navbar = (props) => {
                 <Button />
               </>
             ) : (
-                <DisplayName>
-                  Hi
-                  {' '}
-                  {user.displayName}
-                </DisplayName>
+                <UserDropDown user={user} />
               )}
           </div>
 
