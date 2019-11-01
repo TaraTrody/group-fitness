@@ -6,9 +6,8 @@
   "scripts": {
     "build": "next build",
     "start": "next start",
-    "dev": "next",
-    "lint": "eslint pages --fix",
-    "dev-express": "nodemon server/app.js --watch server"
+    "dev": "nodemon server/app.js --watch server",
+    "lint": "eslint pages --fix"
   },
   "author": "",
   "license": "ISC",
