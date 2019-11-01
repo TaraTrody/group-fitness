@@ -68,12 +68,14 @@ app.prepare().then(() => {
     }),
   );
 
-  server.get('/', async (req, res) => {
+  server.get('/', (req, res) => {
     req.session.foo = 'bar';
-    const user = await User.findOne({
+    User.findOne({
       slug: 'team - builder - book',
+    }).then((user) => {
+      req.user = user;
+      app.render(req, res, '/', { user });
     });
-    app.render(req, res, '/', { user });
   });
 
   server.get('*', (req, res) => {
