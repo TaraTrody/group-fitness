@@ -165,6 +165,4 @@ const Spacer = styled.div`
       flex: 1
 `;
 
-const DisplayName = styled.h4`
-      color: ${mainText};
-`;
+

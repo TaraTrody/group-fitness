@@ -41,11 +41,11 @@ const UserDropDown = (props) => {
             </li>
             <li>
               <Link href="/">
-                <a>Help</a>
+                <a>FAQ</a>
               </Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="/logout">
                 <a>Log Out</a>
               </Link>
             </li>
