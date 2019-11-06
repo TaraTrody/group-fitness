@@ -11,6 +11,9 @@ import Button from './Button'
 import UserDropDown from './UserDropDown'
 
 
+const mainText = ({ theme }) => theme.text.main;
+const primaryColor = ({ theme }) => theme.primary.main;
+
 const Navbar = (props) => {
   const { navbarState, handleNavbar, user } = props;
 
@@ -54,8 +57,11 @@ const Navbar = (props) => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
-                      <NavItem>Log In</NavItem>
+                    <Link href="/login">
+                      <NavItem>
+                        Log In
+
+                      </NavItem>
                     </Link>
                   </li>
                 </NavLinks>
@@ -91,8 +97,7 @@ Navbar.defaultProps = {
 
 export default Navbar;
 
-const mainText = ({ theme }) => theme.text.main;
-const primaryColor = ({ theme }) => theme.primary.main;
+
 
 const NavBar = styled(animated.header)`
           width: 100%;
@@ -135,10 +140,14 @@ const NavLinks = styled(animated.ul)`
         align-items: center;
         & li {
           list-style: none;
+          margin: 0 1.1em 0 0;
         }
+        
       
       @media (max-width: 51.25rem) {
         display: none;
+      }
+        
       }
       
     `;
@@ -148,7 +157,10 @@ const NavItem = styled.a`
       
   &:hover {
           color: ${primaryColor};
+          cursor: pointer;
       }
+ 
+
     `;
 
 const BurgerWrapper = styled.div`
@@ -164,5 +176,7 @@ const BurgerWrapper = styled.div`
 const Spacer = styled.div`
       flex: 1
 `;
+
+
 
 
