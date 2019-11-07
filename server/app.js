@@ -5,6 +5,7 @@ const next = require('next');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const mongoSessionStore = require('connect-mongo');
+const auth = require('./lib/passport-local');
 
 const User = require('./models/User');
 
@@ -54,7 +55,7 @@ app.prepare().then(() => {
   server.use(
     session({
       name: 'group-fitness.sid',
-      secret: 'kicklightenhotrailwayjoincarriagezephyr',
+      secret: process.env.SESSION_SECRET,
       store: new MongoStore({
         mongooseConnection: mongoose.connection,
         ttl: 14 * 24 * 60 * 60,
@@ -67,6 +68,9 @@ app.prepare().then(() => {
       },
     }),
   );
+
+  server.use(auth.initialize);
+  server.use(auth.session);
 
   server.get('/', (req, res) => {
     req.session.foo = 'bar';
