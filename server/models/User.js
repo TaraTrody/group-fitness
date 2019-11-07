@@ -1,40 +1,72 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
-const { Schema } = mongoose;
+const userSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    trim: true,
+    min: [2, 'Name should be between 2 and 30 characters'],
+    max: [30, 'Name should be between 3 and 30 characters'],
+    required: [true, 'First name is required'],
+  },
+  lastName: {
+    type: String,
+    trim: true,
 
-const userSchema = new Schema({
-  googleId: {
-    type: String,
-    required: false,
-    unique: true,
+    min: [2, 'Name should be between 2 and 30 characters'],
+    max: [30, 'Name should be between 3 and 30 characters'],
+    required: [true, 'Last name is required'],
   },
-  googleToken: {
-    access_token: String,
-    refresh_token: String,
-    token_type: String,
-    expiry_date: Number,
-  },
-  slug: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  createdAt: {
-    type: Date,
-    require: true,
-  },
+
   email: {
     type: String,
-    required: true,
+    required: [true, 'User email is required'],
+    lowercase: true,
+    trim: true,
     unique: true,
+    validate: {
+      validator: (props) => `${props.value} is not a vaild email address`,
+    },
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    min: [8, 'Password must have at least 8 characters'],
+    max: 160,
   },
-  displayName: String,
-  avatarUrl: String,
+
+  userType: {
+    type: String,
+    enum: ['Instructor', 'Studio/Gym'],
+    required: 'Please select',
+  },
+
+  created: {
+    type: Date,
+    default: Date.now,
+  },
+
+  updated: {
+    type: Date,
+  },
 });
+
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+
+  try {
+    const hash = await bcrypt.hash(this.password, 10);
+    this.password = hash;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+userSchema.method.validatePassword = async function validatePassword(plainTextPassword) {
+  return bcrypt.compare(plainTextPassword, this.password);
+};
 
 const User = mongoose.model('User', userSchema);
 
