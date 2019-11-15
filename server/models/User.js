@@ -24,22 +24,24 @@ const userSchema = new mongoose.Schema({
     required: [true, 'User email is required'],
     lowercase: true,
     trim: true,
-    unique: true,
+    index: { unique: true },
     validate: {
-      validator: (props) => `${props.value} is not a vaild email address`,
+      validator: (email) => User.doesNotExist({ email }),
+      message: 'Email already exists',
     },
   },
   password: {
     type: String,
-    required: [true, 'Password is required'],
+    index: { unique: true },
     min: [8, 'Password must have at least 8 characters'],
     max: 160,
+    required: [true, 'Password is required'],
   },
 
   userType: {
     type: String,
     enum: ['Instructor', 'Studio/Gym'],
-    required: 'Please select',
+    // required: 'Please select',
   },
 
   created: {
@@ -63,6 +65,10 @@ userSchema.pre('save', async function(next) {
     return next(err);
   }
 });
+
+userSchema.statics.doesNotExist = async function doesNotExist(field) {
+  return (await this.where(field).countDocuments()) === 0;
+};
 
 userSchema.method.validatePassword = async function validatePassword(plainTextPassword) {
   return bcrypt.compare(plainTextPassword, this.password);
