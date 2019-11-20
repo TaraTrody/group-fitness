@@ -4,7 +4,9 @@ import Link from 'next/link';
 const GoogleButton = () => {
   return (
     <Link href="/">
-      <Button style={{ cursor: 'pointer' }}>Sign Up with Google</Button>
+      <Button style={{ cursor: 'pointer' }}>
+        <span>Sign Up with Google</span>
+      </Button>
     </Link>
   );
 };
@@ -12,7 +14,8 @@ const GoogleButton = () => {
 export default GoogleButton;
 
 const Button = styled.a`
-  background-color: #fff;
+  
+  background: url("/icons8-google.svg") no-repeat 11% 50% ;
   box-shadow: 0 2px 8px 0 #ccc;
   margin-top: 20px;
   padding: 10px 69px 8px;
@@ -20,4 +23,8 @@ const Button = styled.a`
   border-radius: 2px;
   height: 40px;
   font-size: 1rem;
+  vertical-align: middle;
+  text-align: center; 
+  
+  
 `;
