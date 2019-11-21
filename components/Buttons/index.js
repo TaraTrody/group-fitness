@@ -1,7 +1,5 @@
-import facebookButton from './facebook-button';
-import googleButton from './google-button';
+import FacebookButton from './facebook-button';
+import GoogleButton from './google-button';
+import SignupButton from './signup-button';
 
-export default {
-  facebookButton,
-  googleButton,
-};
+export { FacebookButton, GoogleButton, SignupButton };

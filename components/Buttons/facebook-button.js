@@ -3,28 +3,34 @@ import Link from 'next/link';
 
 const FacebookButton = () => {
   return (
-    <Link href="/">
-      <Button>
-        <span>Sign Up with Facebook</span>
-      </Button>
-    </Link>
+    <>
+      <Link href="/login">
+        <Button>Sign Up with Facebook</Button>
+      </Link>
+    </>
   );
 };
 
 export default FacebookButton;
 
 const Button = styled.a`
-  
-
-background-color: #3b5998;np
-background-size: 20px 20px;
-  border-color: #324b80;
   padding: 10px 60px 8px;
+  border-radius: 2.5px;
+  background-color: #4c69ba;
+  box-shadow: 0 2px 8px 0 #ccc;
   color: #fff;
-  border-radius: 2px;
-  height: 40px;
-  font-size: 1rem;
+  position: relative;
   cursor: pointer;
-  vertical-align: middle;
-  text-align: center;
+  width: 100%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    background-color: #4c69ba;
+    background: url('/icons8-facebook-f.svg') 26px 7px no-repeat;
+  }
 `;
