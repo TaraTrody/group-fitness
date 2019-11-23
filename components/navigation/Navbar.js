@@ -47,7 +47,7 @@ const Navbar = (props) => {
               <>
                 <NavLinks style={linkAnimation}>
                   <li>
-                    <Link href="https://google.com">
+                    <Link href="/">
                       <NavItem>Join as Instructor</NavItem>
                     </Link>
                   </li>
@@ -87,7 +87,7 @@ Navbar.propTypes = {
   navbarState: bool.isRequired,
   handleNavbar: func.isRequired,
   user: propTypes.shape({
-    displayName: propTypes.string.isRequired
+    firstName: propTypes.string.isRequired
   })
 }
 
@@ -108,6 +108,7 @@ const NavBar = styled(animated.header)`
           position: fixed;
           border-bottom: 1px solid #e9eaea;
           min-width: 23.4rem;
+          z-index: 100;
         `;
 
 const FlexContainer = styled.div`
