@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
+
 const SignupButton = () => (
-  <Link href="/">
+  <Link href="/instructor-signup">
     <Button>Sign up</Button>
   </Link>
 );
