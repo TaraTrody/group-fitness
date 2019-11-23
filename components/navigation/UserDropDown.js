@@ -19,7 +19,7 @@ const UserDropDown = (props) => {
         <DisplayName>
           Hi
           {' '}
-          {user.displayName}
+          {user.firstName}
         </DisplayName>
         <FontAwesomeIcon style={{ marginLeft: '0.5rem' }} icon={faAngleUp} />
       </DisplayNameWrapper>
@@ -30,7 +30,7 @@ const UserDropDown = (props) => {
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
               onClick={() => toggleList()}
             >
-              <h4>{user.displayName}</h4>
+              <h4>{user.firstName}</h4>
               <FontAwesomeIcon style={{ marginLeft: '0.5rem' }} icon={faAngleDown} />
             </li>
 
@@ -45,7 +45,7 @@ const UserDropDown = (props) => {
               </Link>
             </li>
             <li>
-              <Link href="/logout">
+              <Link href="/api/user/logout">
                 <a>Log Out</a>
               </Link>
             </li>
@@ -60,7 +60,7 @@ export default UserDropDown;
 
 UserDropDown.propTypes = {
   user: propTypes.shape({
-    displayName: propTypes.string.isRequired,
+    firstName: propTypes.string.isRequired,
   }).isRequired,
 };
 
