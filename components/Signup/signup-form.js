@@ -1,102 +1,46 @@
 import styled from 'styled-components';
-import { useFormik } from 'formik';
+import { withRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
-import FacebookButton from '../Buttons/facebook-button';
-import GoogleButton from '../Buttons/google-button';
+const SignupForm = ({ router }) => {
+  let Form = '';
 
-const SignUpForm = () => {
-  const formik = useFormik({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-    },
-  });
+  if (router.pathname === '/instructor-signup') {
+    Form = dynamic(() => import('./instructor-signup'));
+  } else {
+    Form = dynamic(() => import('./studio-signup'));
+  }
 
   return (
-    <Wrapper>
-      <form onSubmit={formik.handleSubmit}>
-        <SocialWrapper>
-          <FacebookButton />
-          <GoogleButton />
-          <p style={{ margin: '35px' }}>
-            <span style={{ color: '#B3B8B8' }}>or</span>
-          </p>
-        </SocialWrapper>
-        <InputWrapper>
-          <FieldWrapper>
-            <input
-              className="name"
-              style={{ marginRight: '5px' }}
-              id="firstName"
-              name="firstName"
-              type="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.firstName}
-              placeholder="First Name"
-            />
-          </FieldWrapper>
-          <FieldWrapper>
-            <input
-              style={{ marginLeft: '5px' }}
-              className="name"
-              id="lastName"
-              name="lastName"
-              type="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.lastName}
-              placeholder="Last Name"
-            />
-          </FieldWrapper>
-        </InputWrapper>
-      </form>
-    </Wrapper>
+    <Container>
+      <LeftColumn />
+      <RightColumn>
+        <Form />
+      </RightColumn>
+    </Container>
   );
 };
 
+export default withRouter(SignupForm);
 
-const Wrapper = styled.div`
+const Container = styled.div`
+  width: 640px;
+  height: 552px;
+  background: #fff;
+  margin: 0 auto;
   display: flex;
-  width: 300px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+
+  color: ${({ theme }) => theme.text.main};
+`;
+
+const LeftColumn = styled.div`
+  background: ${({ theme }) => theme.primary.main};
+  width: 40%;
+`;
+
+const RightColumn = styled.div`
+  width: 60%;
+  display: flex;
   justify-content: center;
-
-
-  p {
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid #b3b8b8;
-    line-height: 0.1em;
-    margin: 10px 0 20px;
-  }
-  p span {
-    background: #fff;
-    padding: 0 10px;
-    color: #b3b8b8;
-  }
 `;
-
-
-
-const SocialWrapper = styled.div`
-  margin-top: 2.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const InputWrapper = styled.div`
-  // display: flex;
-  // flex-wrap: wrap;
-
- 
-
-`;
-
-const FieldWrapper = styled.div`
-  padding: 8px;
-`;
-
-
-export default SignUpForm;
