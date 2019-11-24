@@ -1,3 +1,3 @@
-import InstructorSignupForm from './instructor-signup';
+import InstructorSignupForm from './signup-form';
 
 export { InstructorSignupForm };
