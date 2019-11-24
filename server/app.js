@@ -7,6 +7,7 @@ const mongoSessionStore = require('connect-mongo');
 const uid = require('uid-safe');
 
 const { userRoutes } = require('./routes/index');
+const auth = require('./middlewares/passport-local');
 
 const User = require('./models/User');
 
@@ -51,25 +52,17 @@ const handle = app.getRequestHandler();
         cookie: {
           httpOnly: true,
           maxAge: 14 * 24 * 60 * 60 * 1000,
-          secure: NODE_ENV === 'production',
+          secure: process.env.NODE_ENV === 'production',
         },
       }),
     );
 
+    server.use(auth.initialize);
+    server.use(auth.session);
+
     const apiRouter = express.Router();
     server.use('/api', apiRouter);
     apiRouter.use('/user', userRoutes);
-
-    server.get('/', (req, res) => {
-      req.session.foo = 'bar';
-      User.findOne({
-        slug: 'team - builder - book',
-      }).then((user) => {
-        req.user = user;
-        res.status(200).json(user);
-        app.render(req, res, '/', { user });
-      });
-    });
 
     server.get('*', (req, res) => {
       handle(req, res);
