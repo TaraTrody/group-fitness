@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import withAuth from '../lib/withAuth';
+// import InstructorSignup from '../components/Signup';
 
 const Login = () => (
   <div style={{ padding: '10px 45px', marginTop: '100px' }}>
@@ -11,7 +12,7 @@ const Login = () => (
     <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Log in</p>
     <p>You’ll be logged in for 14 days unless you log out manually.</p>
     <br />
-    <button type="submit">Log in with Google</button>
+    {/* <InstructorSignup /> */}
   </div>
 );
 
