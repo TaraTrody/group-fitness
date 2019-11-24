@@ -70,7 +70,7 @@ userSchema.statics.doesNotExist = async function doesNotExist(field) {
   return (await this.where(field).countDocuments()) === 0;
 };
 
-userSchema.method.validatePassword = async function validatePassword(plainTextPassword) {
+userSchema.methods.validatePassword = async function validatePassword(plainTextPassword) {
   return bcrypt.compare(plainTextPassword, this.password);
 };
 
