@@ -2,13 +2,18 @@
 import { ThemeProvider } from 'styled-components';
 import App from 'next/app';
 import React from 'react';
+import Router from 'next/router';
+import NProgress from 'nprogress';
+
 
 import { theme } from '../lib/theme';
 import GlobalStyles from '../lib/global';
 
-import Navigation from '../components/navigation/index';
+import Navigation from '../components/Navigation/index';
 
-// import Header from '../components/Navbar';
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done()
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
