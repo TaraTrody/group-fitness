@@ -1,19 +1,14 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { ThemeProvider } from 'styled-components';
 import App from 'next/app';
 import React from 'react';
-import Router from 'next/router';
-import NProgress from 'nprogress';
-
+import { Provider } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
+import makeStore from '../redux/store';
 
 import { theme } from '../lib/theme';
 import GlobalStyles from '../lib/global';
 
 import Navigation from '../components/Navigation/index';
-
-Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done()
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -22,8 +17,6 @@ class MyApp extends App {
     if (Component.getInitialProps) {
       Object.assign(pageProps, await Component.getInitialProps(ctx));
     }
-    // eslint-disable-next-line no-console
-    console.log(pageProps);
 
     return { pageProps };
   }
@@ -36,24 +29,20 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
-
-    // console.log(pageProps);
+    const { Component, pageProps, store} = this.props;
 
     return (
       <>
-        {/* ThemeProvider makes the theme available down the React
-              tree thanks to React context. */}
         <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-
-          <Navigation {...pageProps} />
-          <GlobalStyles />
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Navigation {...pageProps} />
+            <GlobalStyles />
+            <Component {...pageProps} />
+          </Provider>
         </ThemeProvider>
       </>
     );
   }
 }
 
-export default MyApp;
+export default withRedux(makeStore)(MyApp);
