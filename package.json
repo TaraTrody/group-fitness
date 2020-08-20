@@ -17,7 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
     "@hapi/joi": "^16.1.7",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "connect-mongo": "^3.1.0",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.7.0",
